@@ -1,0 +1,17 @@
+body {
+  font-family: "Jost", sans-serif;
+}
+
+.navbar {
+  background-image: url("/assets/f1img.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}

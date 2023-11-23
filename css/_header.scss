@@ -1,0 +1,17 @@
+.navbar{
+    background-image: url('/assets/f1img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    color: white;
+
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    a:hover{
+        text-decoration: underline;
+    }
+}
+
