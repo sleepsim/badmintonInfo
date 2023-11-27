@@ -3,15 +3,20 @@ body {
 }
 
 .navbar {
-  background-image: url("/assets/f1img.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
+  color: black;
 }
 .navbar a {
-  color: white;
+  color: black;
   text-decoration: none;
 }
 .navbar a:hover {
   text-decoration: underline;
+}
+
+.main-page-image {
+  background-image: url("/assets/f1img.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
