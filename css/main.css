@@ -5,6 +5,7 @@ body {
 .navbar {
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: white;
   color: black;
 }
 .navbar a {
