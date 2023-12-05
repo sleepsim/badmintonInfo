@@ -22,15 +22,18 @@
 
     <body>
         <!-- Navbar -->
-        <div class="navbar fixed-top navbar-expand-sm">
-            <a class="navbar-brand">brandHere</a>
+        <div class="navbar navbar-expand-sm">
+            <a class="navbar-brand">badmintonINFO</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Catalog</a>
+                        <a class="nav-link" href="equipmentlist.php">Equipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="playerlist.php">Pro-Players</a>
                     </li>
                 </ul>
 
@@ -39,7 +42,7 @@
                         <a class="nav-link" href="">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=""> Login</a>
+                        <a class="nav-link" href="login.php"> Login</a>
                     </li>
                 </ul>
             </div>
