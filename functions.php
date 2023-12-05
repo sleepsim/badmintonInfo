@@ -18,7 +18,7 @@ session_start();
         }
     }
 
-    $db = connectToDB('localhost', 'root', '', 'classicmodels');
+    $db = connectToDB('localhost', 'root', '', 'badmintoninfo');
 
     function connectToDB($dbhost, $dbuser, $dbpass, $dbname) {
         $connection = @mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
