@@ -31,9 +31,9 @@
                     <h2>Browse Rackets</h2>
                     <p>Browse popular rackets from different manufacturers</p>
                     <div class="d-flex flex-column m-3">
-                        <a href="" class="btn btn-primary m-1">Browse All</a>
-                        <a href="" class="btn btn-primary m-1">Browse Yonex</a>
-                        <a href="" class="btn btn-primary m-1">Browse Li-Ning</a>
+                        <a href="equipmentlist.php?type=racket" class="btn btn-primary m-1">Browse All</a>
+                        <a href="equipmentlist.php?type=racket" class="btn btn-primary m-1">Browse Yonex</a>
+                        <a href="equipmentlist.php?type=racket" class="btn btn-primary m-1">Browse Li-Ning</a>
                     </div>
                 </div>
 
@@ -55,9 +55,9 @@
                     <h2>Browse Shoes</h2>
                     <p>Browse shoes from different manufacturers</p>
                     <div class="d-flex flex-column m-3">
-                        <a href="" class="btn btn-primary m-1">Browse All</a>
-                        <a href="" class="btn btn-primary m-1">Browse Yonex</a>
-                        <a href="" class="btn btn-primary m-1">Browse Li-Ning</a>
+                        <a href="equipmentlist.php?type=shoes" class="btn btn-primary m-1">Browse All</a>
+                        <a href="equipmentlist.php?type=shoes" class="btn btn-primary m-1">Browse Yonex</a>
+                        <a href="equipmentlist.php?type=shoes" class="btn btn-primary m-1">Browse Li-Ning</a>
                     </div>
                 </div>
             </div>
