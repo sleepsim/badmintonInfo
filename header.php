@@ -23,7 +23,7 @@
     <body>
         <!-- Navbar -->
         <div class="navbar navbar-expand-sm">
-            <a class="navbar-brand">badmintonINFO</a>
+            <a class="navbar-brand" href="index.php">badmintonINFO</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">

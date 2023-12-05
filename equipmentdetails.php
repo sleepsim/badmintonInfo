@@ -55,9 +55,12 @@
             $description = $productDetails['itm_desc'];
         }
 
+        $initResult->free_result();
+
+    }else{
+        header("Location: equipmentlist.php");
     }
 
-    $initResult->free_result();
     
 
 ?>
@@ -87,7 +90,7 @@
         </div>
         <div class="col-4">
             <h2 class="mt-5"><?php echo $productDetails['name']; ?></h2>
-            <h5 class="mb-3 mt-3">Specs</h5>
+            <h5 class="mb-3 mt-3">Details</h5>
 
             <?php if ($productDetails['type'] == 'Racket'): ?>
             <p>Item Code: <?php echo $productDetails['itm_code']; ?></p>
@@ -109,9 +112,7 @@
 </div>
 
 <?php 
-
-require('footer.php');
-
-// After rendering everything free the result.
-$result->free_result();
+    require('footer.php');
+    // After rendering everything free the result.
+    $result->free_result();
 ?>
