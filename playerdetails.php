@@ -4,7 +4,9 @@
     no_SSL();
 
     if(isset($_GET['id']) && !empty($_GET['id'])){
-        $query = "SELECT * FROM player WHERE id = ?";
+        $query = "SELECT * 
+                  FROM player JOIN discipline on player.id = discipline.id 
+                  WHERE player.id = ?";
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $_GET['id']);
         $stmt->execute();   
@@ -21,6 +23,8 @@
         $age = $playerDetails['age'];
         $gender = $playerDetails['gender'];
         $img = $playerDetails['img'];
+        $discipline = $playerDetails['type'];
+        $rank = $playerDetails['rank'];
     }
 ?>
 
@@ -44,7 +48,7 @@
     <div class="row justify-content-center">
         <div class="col-5 text-center ml-5 pl-5 mr-0 pr-0">
             <?php  
-                echo '<img src="data:image;base64,' . base64_encode($img) . '" class="img-fluid mx-auto w-50">';
+                echo '<img src="data:image;base64,' . base64_encode($img) . '" class="rounded img-fluid mx-auto w-50">';
             ?>
         </div>
         <div class="col-4">
@@ -55,12 +59,24 @@
             <p>Nationality: <?php echo $playerDetails['nationality']; ?></p>
             <p>Age: <?php echo $playerDetails['age']; ?></p>
             <p>Gender: <?php echo $playerDetails['gender']; ?></p>
-           
+            <p>World Rank: <?php echo $rank?> - <?php echo $discipline?></p>
         </div>
     </div>
 
     <div class="row justify-content-center mt-5">
-        <h2>Comments and Reviews</h2>
+        <?php 
+            $equipmentQuery = "";
+        ?>
+        <h2>Equipment Used</h2>
+    </div>
+
+    <div class="row justify-content-center text-center">
+        <div class="col">
+            <p>asdasd</p>
+        </div>
+        <div class="col">
+            <p>sdrgreg</p>
+        </div>
     </div>
 
 </div>

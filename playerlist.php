@@ -5,12 +5,12 @@ no_SSL();
 
 if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'all')) {
     $query = "SELECT *
-              FROM player
-              WHERE gender = ?";
+              FROM player JOIN discipline on player.id = discipline.id
+              WHERE player.gender = ?";
 
-    // Check if gender is set
+    // Check if discipline is set
     if (isset($_GET['discipline']) && !empty($_GET['discipline']) && ($_GET['discipline'] != 'all')) {
-        $query .= " AND discipline = ?";
+        $query .= " AND discipline.type = ?";
         $stmt = $db->prepare($query);
         $stmt->bind_param('ss', $_GET['gender'], $_GET['discipline']);
     } else {
@@ -22,11 +22,11 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
     $result = $stmt->get_result();
 } else { //If filter isnt set
     $query = "SELECT *
-              FROM player";
+              FROM player JOIN discipline on player.id = discipline.id";
 
     // Check if the manufacturer is set and not empty
     if (isset($_GET['discipline']) && !empty($_GET['discipline']) && ($_GET['discipline'] != 'all')) {
-        $query .= " WHERE equipment.manufacturer = ?";
+        $query .= " WHERE discipline.type = ?";
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $_GET['discipline']);
     } else {
@@ -70,9 +70,9 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
                 <label><input type="radio" name="gender" value="male"> Men</label> <br>
                 <label><input type="radio" name="gender" value="female"> Women</label> <br>
                 <p>Discipline</p>
-                <label><input type="radio" name="" value="all" checked> All</label><br>
-                <label><input type="radio" name="" value="Singles"> Singles</label><br>
-                <label><input type="radio" name="" value="Doubles"> Doubles</label><br>
+                <label><input type="radio" name="discipline" value="all" checked> All</label><br>
+                <label><input type="radio" name="discipline" value="Singles"> Singles</label><br>
+                <label><input type="radio" name="discipline" value="Doubles"> Doubles</label><br>
                 <!-- <label><input type="radio" name="manufacturer" value=""> Victor</label><br> -->
 
                 <input type="submit" value="Filter">
@@ -89,10 +89,10 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
                         echo "<div class=\"row align-items-end\">";
                     }
                 
-                    echo "<div class=\"col text-center\">";
+                    echo "<div class=\"col text-center mb-3\">";
                     
                     if (isset($row['firstName'])) {
-                        echo '<a href="playerdetails.php?id=' . $row['id'] . '"><img src="data:image;base64,' . base64_encode($row['img']) . '" class="img-fluid mx-auto w-50"></a><br>';
+                        echo '<a href="playerdetails.php?id=' . $row['id'] . '"><img src="data:image;base64,' . base64_encode($row['img']) . '" class="rounded-circle img-fluid mx-auto w-50"></a><br>';
                         echo '<a href="playerdetails.php?id=' . $row['id'] . '" class="list-link">' . $row['lastName'] . ", ".  $row['firstName'] . '</a>';
                     } else {
                         // Empty column
@@ -128,3 +128,34 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
     // After rendering everything free the result.
     $result->free_result();
 ?>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+
+    // Set the selected value for the "gender" radio buttons
+    var genderParam = params.get('gender');
+    if (genderParam) {
+      var genderRadioButton = document.querySelector('input[name="gender"][value="' + genderParam + '"]');
+      if (genderRadioButton) {
+        genderRadioButton.checked = true;
+      }
+    }
+
+    // Set the selected value for the "discipline" radio buttons
+    var disciplineParam = params.get('discipline');
+    if (disciplineParam) {
+      var disciplineRadioButton = document.querySelector('input[name="discipline"][value="' + disciplineParam + '"]');
+      if (disciplineRadioButton) {
+        disciplineRadioButton.checked = true;
+      }
+    }
+
+    document.getElementById('filterForm').addEventListener('change', function() {
+      var selectedGender = document.querySelector('input[name="gender"]:checked').value;
+      var selectedDiscipline = document.querySelector('input[name="discipline"]:checked').value;
+      console.log("Selected Gender:", selectedGender);
+      console.log("Selected Discipline:", selectedDiscipline);
+    });
+  });
+</script>
