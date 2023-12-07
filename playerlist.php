@@ -10,9 +10,21 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
 
     // Check if discipline is set
     if (isset($_GET['discipline']) && !empty($_GET['discipline']) && ($_GET['discipline'] != 'all')) {
-        $query .= " AND discipline.type = ?";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('ss', $_GET['gender'], $_GET['discipline']);
+        if($_GET['discipline'] == 'Singles'){
+            $key1 = 'Womens Singles';
+            $key2 = 'Mens Singles';
+            $query .= " AND (discipline.type = ? OR discipline.type = ?)";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('sss', $_GET['gender'], $key1, $key2);
+        }
+        if($_GET['discipline'] == 'Doubles'){
+            $key1 = 'Mixed Doubles';
+            $key2 = 'Mens Doubles';
+            $key3 = 'Womens Doubles';
+            $query .= " AND (discipline.type = ? OR discipline.type = ? OR discipline.type = ?)";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('ssss', $_GET['gender'], $key1, $key2, $key3);
+        }
     } else {
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $_GET['gender']);
@@ -26,9 +38,21 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
 
     // Check if the manufacturer is set and not empty
     if (isset($_GET['discipline']) && !empty($_GET['discipline']) && ($_GET['discipline'] != 'all')) {
-        $query .= " WHERE discipline.type = ?";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param('s', $_GET['discipline']);
+        if($_GET['discipline'] == 'Singles'){
+            $key1 = 'Womens Singles';
+            $key2 = 'Mens Singles';
+            $query .= " WHERE discipline.type = ? OR discipline.type = ?";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('ss', $key1, $key2);
+        }
+        if($_GET['discipline'] == 'Doubles'){
+            $key1 = 'Mixed Doubles';
+            $key2 = 'Mens Doubles';
+            $key3 = 'Womens Doubles';
+            $query .= " WHERE discipline.type = ? OR discipline.type = ? OR discipline.type = ?";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('sss', $key1, $key2, $key3);
+        }
     } else {
         $query .= " ORDER BY firstName";
         $stmt = $db->prepare($query);
