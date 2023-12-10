@@ -92,7 +92,7 @@
             <h2 class="mt-5"><?php echo $productDetails['name']; ?></h2>
             <h5 class="mb-3 mt-3">Details</h5>
 
-            <?php if ($productDetails['type'] == 'Racket'): ?>
+            <?php if($productDetails['type'] == 'Racket'): ?>
             <p>Item Code: <?php echo $productDetails['itm_code']; ?></p>
             <p>Manufacturer: <?php echo $productDetails['manufacturer']; ?></p>
             <p>Weight: <?php echo $productDetails['weight']; ?></p>
@@ -101,6 +101,17 @@
             <?php else: ?>
             <p>Item Code: <?php echo $productDetails['itm_code']; ?></p>
             <p>Description: <?php echo $productDetails['itm_desc']; ?></p>
+            <?php endif; ?>
+
+            <p class="lead">&#9733 24</p>
+
+            <?php if(isset($_SESSION['username']) && !in_watchlist($productDetails['itm_code'])): ?>
+                <form method="post" action="addtowatchlist.php">
+                    <input type="hidden" name="itm_code" value="<?= $productDetails['itm_code']; ?>">
+                    <button class="btn btn-primary" type="submit">Add to Favourites</button>
+                </form>
+            <?php else: ?>
+                <p>item is in your favourites. click here to remove</p>
             <?php endif; ?>
         </div>
     </div>

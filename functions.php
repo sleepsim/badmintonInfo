@@ -38,4 +38,7 @@
         return isset($_SESSION['username']);
     }
 
+    function in_watchlist(){
+        return false;
+    }
 ?>

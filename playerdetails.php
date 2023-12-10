@@ -25,6 +25,15 @@
         $img = $playerDetails['img'];
         $discipline = $playerDetails['type'];
         $rank = $playerDetails['rank'];
+
+
+        $query2 = "SELECT *
+                   FROM usedby JOIN equipment ON usedby.itm_code = equipment.itm_code 
+                   WHERE usedby.id = ?";
+        $stmt2 = $db->prepare($query2);
+        $stmt2->bind_param('s', $_GET['id']);
+        $stmt2->execute();
+        $equipmentResult = $stmt2->get_result();
     }
 ?>
 
@@ -52,10 +61,8 @@
             ?>
         </div>
         <div class="col-4">
-            <h2 class="mt-5"><?php echo $firstName . " " .$lastName; ?></h2>
-            <h5 class="mb-3 mt-3">Details</h5>
-            <p>First Name: <?php echo $playerDetails['firstName']; ?></p>
-            <p>Last Name: <?php echo $playerDetails['lastName']; ?></p>
+            <h2 class="mb-3"><?php echo $firstName . " " .$lastName; ?></h2>
+            <p class="lead mb-4">0 Followers</p>
             <p>Nationality: <?php echo $playerDetails['nationality']; ?></p>
             <p>Age: <?php echo $playerDetails['age']; ?></p>
             <p>Gender: <?php echo $playerDetails['gender']; ?></p>
@@ -64,19 +71,42 @@
     </div>
 
     <div class="row justify-content-center mt-5">
-        <?php 
-            $equipmentQuery = "";
-        ?>
-        <h2>Equipment Used</h2>
+        <h4>Equipment Used</h4>
     </div>
 
-    <div class="row justify-content-center text-center">
-        <div class="col">
-            <p>asdasd</p>
-        </div>
-        <div class="col">
-            <p>sdrgreg</p>
-        </div>
+    <?php 
+        $counter = 0;
+        while ($row = mysqli_fetch_array($equipmentResult)) {
+            // Start a new row for every two items
+            if ($counter % 2 == 0) {
+                echo '<div class="row align-items-end justify-content-center text-center">';
+                // Add a spacer column before the items
+                echo '<div class="col"></div>';
+            }
+
+            echo '<div class="col">';
+            echo '<a href="equipmentdetails.php?itm_code=' . $row['itm_code'] . '">';
+            echo '<img src="data:image;base64,' . base64_encode($row['img']) . '" class="img-fluid mx-auto w-50"></a><br>';
+            echo '<a href="equipmentdetails.php?itm_code=' . $row['itm_code'] . '" class="list-link">' . $row['name'] . '</a>';
+            echo '</div>';
+
+            $counter++;
+
+            // Close the row and add a spacer column after every two items
+            if ($counter % 2 == 0) {
+                echo '<div class="col"></div></div>';
+            }
+        }
+
+        // Add an empty column and close the row if the number of items is odd
+        if ($counter % 2 == 1) {
+            echo '<div class="col"></div>';
+            echo '<div class="col"></div></div>';
+        }
+    ?>
+
+    <div class="row justify-content-center mt-5 mb-5">
+        <h4>Fan Zone</h4>
     </div>
 
 </div>
@@ -86,4 +116,5 @@
     require('footer.php');
     // After rendering everything free the result.
     $result->free_result();
+    $equipmentResult->free_result();
 ?>

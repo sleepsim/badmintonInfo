@@ -35,6 +35,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="playerlist.php">Pro-Players</a>
                     </li>
+
+                    <!-- If user is logged in, watchlist button -->
+                    <?php 
+                        if(isset($_SESSION['username'])){
+                            echo "<li class=\"nav-item\">
+                            <a class=\"nav-link\" href=\"watchlist.php\">Favourites</a>
+                            </li>";
+                        }
+                    ?>
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
