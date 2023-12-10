@@ -38,12 +38,22 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php"> Login</a>
-                    </li>
+                    <?php 
+                        // If logged in, change right buttons to logout, else register/login
+                        if(isset($_SESSION['username'])){
+                            echo  "<li class=\"nav-item\">
+                                  <a class=\"nav-link\" href=\"logout.php\">Logout</a>
+                                  </li>";
+                        }else{
+                            echo "<li class=\"nav-item\">
+                                    <a class=\"nav-link\" href=\"register.php\">Register</a>
+                                  </li>";
+
+                            echo "<li class=\"nav-item\">
+                                    <a class=\"nav-link\" href=\"login.php\"> Login</a>
+                                  </li>";
+                        }
+                    ?>
                 </ul>
             </div>
         </div>

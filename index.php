@@ -1,4 +1,10 @@
-<?php require('header.php'); ?>
+<?php 
+    include('functions.php');
+    no_SSL();
+?>
+
+
+<?php require('header.php');?>
 
         <!-- Masthead header -->
         <div class="masthead text-center mb-5">
