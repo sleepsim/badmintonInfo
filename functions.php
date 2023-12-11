@@ -38,7 +38,19 @@
         return isset($_SESSION['username']);
     }
 
-    function in_watchlist(){
+    function in_watchlist($itm_code){
+        global $db;
+
+        if(isset($_SESSION['username'])){
+            $query = "SELECT COUNT(*) FROM favourites WHERE itm_code = ? AND username = ?";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param('ss', $itm_code, $_SESSION['username']);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            return ($stmt->fetch() && $count >0);
+
+        }
+
         return false;
     }
 ?>

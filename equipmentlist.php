@@ -31,6 +31,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
     // Check if the manufacturer is set and not empty
     if (isset($_GET['manufacturer']) && !empty($_GET['manufacturer']) && ($_GET['manufacturer'] != 'all')) {
         $query .= " WHERE equipment.manufacturer = ?";
+        $query .= " ORDER BY equipment.type, equipment.name";
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $_GET['manufacturer']);
     } else {
@@ -52,8 +53,8 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
 <div class="masthead-small text-center">
     <div class="masthead-overlay">
             <!-- Main Title and sub text -->
-    <h1 class="display-3 pt-5 mt-5 text-center text-white">badmintonINFO</h1>
-    <p class="lead text-center text-white">equipment wiki</p>
+    <h1 class="display-3 pt-5 mt-5 text-center text-white">Equipment List</h1>
+    <p class="lead text-center text-white">rackets and shoes wiki</p>
 
     </div>
 </div>
@@ -79,7 +80,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
                 <label><input type="radio" name="manufacturer" value="li ning"> Li Ning</label><br>
                 <label><input type="radio" name="manufacturer" value="victor"> Victor</label><br>
 
-                <input type="submit" value="Filter">
+                <input type="submit" value="Filter" class="btn btn-primary">
             </form>
 
         </div>

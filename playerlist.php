@@ -14,6 +14,7 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
             $key1 = 'Womens Singles';
             $key2 = 'Mens Singles';
             $query .= " AND (discipline.type = ? OR discipline.type = ?)";
+            $query .= " ORDER BY lastName";
             $stmt = $db->prepare($query);
             $stmt->bind_param('sss', $_GET['gender'], $key1, $key2);
         }
@@ -22,10 +23,12 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
             $key2 = 'Mens Doubles';
             $key3 = 'Womens Doubles';
             $query .= " AND (discipline.type = ? OR discipline.type = ? OR discipline.type = ?)";
+            $query .= " ORDER BY lastName";
             $stmt = $db->prepare($query);
             $stmt->bind_param('ssss', $_GET['gender'], $key1, $key2, $key3);
         }
     } else {
+        $query .= " ORDER BY lastName";
         $stmt = $db->prepare($query);
         $stmt->bind_param('s', $_GET['gender']);
     }
@@ -42,6 +45,7 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
             $key1 = 'Womens Singles';
             $key2 = 'Mens Singles';
             $query .= " WHERE discipline.type = ? OR discipline.type = ?";
+            $query .= " ORDER BY lastName";
             $stmt = $db->prepare($query);
             $stmt->bind_param('ss', $key1, $key2);
         }
@@ -50,11 +54,12 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
             $key2 = 'Mens Doubles';
             $key3 = 'Womens Doubles';
             $query .= " WHERE discipline.type = ? OR discipline.type = ? OR discipline.type = ?";
+            $query .= " ORDER BY lastName";
             $stmt = $db->prepare($query);
             $stmt->bind_param('sss', $key1, $key2, $key3);
         }
     } else {
-        $query .= " ORDER BY firstName";
+        $query .= " ORDER BY lastName";
         $stmt = $db->prepare($query);
     }
 
@@ -72,8 +77,8 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
 <div class="masthead-small text-center">
     <div class="masthead-overlay">
             <!-- Main Title and sub text -->
-    <h1 class="display-3 pt-5 mt-5 text-center text-white">badmintonINFO</h1>
-    <p class="lead text-center text-white">professional players</p>
+    <h1 class="display-3 pt-5 mt-5 text-center text-white">Professional Players</h1>
+    <p class="lead text-center text-white">BWF Ranked Players</p>
 
     </div>
 </div>

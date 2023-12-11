@@ -40,7 +40,7 @@
                     <?php 
                         if(isset($_SESSION['username'])){
                             echo "<li class=\"nav-item\">
-                            <a class=\"nav-link\" href=\"watchlist.php\">Favourites</a>
+                            <a class=\"nav-link\" href=\"favourites.php\">Favourites</a>
                             </li>";
                         }
                     ?>

@@ -5,7 +5,7 @@
 
     if(isset($_GET['itm_code']) && !empty($_GET['itm_code'])){
 
-
+        // Initial query to check if the item is a racket or shoe
         $initialQuery = "SELECT * FROM equipment WHERE itm_code = ?";
         $initStmt = $db->prepare($initialQuery);
         $initStmt->bind_param('s', $_GET['itm_code']);
@@ -13,6 +13,12 @@
         $initResult = $initStmt->get_result();
         $initType = mysqli_fetch_assoc($initResult);
 
+        // If item can't be found in the database, return to equipmentlist.php
+        if(!$initResult->num_rows >0){
+            header("Location: equipmentlist.php");
+        }
+
+        // If item is a racket grab the details needed
         if($initType['type'] == 'Racket'){
             $query = "SELECT * 
                   FROM equipment
@@ -34,7 +40,7 @@
             $stiffness = $productDetails['stiffness'];
             $img = $productDetails['img'];
             $itemName = $productDetails['name'];
-        }else{
+        }else{ //If item is a shoe grab less details
             $query = "SELECT * 
                   FROM equipment
                   JOIN shoes ON equipment.itm_code = shoes.itm_code
@@ -55,9 +61,10 @@
             $description = $productDetails['itm_desc'];
         }
 
+        // Free initial query
         $initResult->free_result();
 
-    }else{
+    }else{ //If empty, go back to equipmentlist
         header("Location: equipmentlist.php");
     }
 
@@ -77,17 +84,25 @@
     </div>
 </div>
 
+<!-- Main Container -->
 <div class="container-fluid">
+
+    <!-- Top left showing equipment/brand/product -->
     <div class="row pl-5 pt-3">
         <h6><a href="equipmentlist.php">All Equipment</a> / <a href="equipmentlist.php?type=all&manufacturer=<?php echo $manufacturer?>"><?php echo $manufacturer; ?></a> / <?php echo $productDetails['itm_code']; ?></h6>
     </div>
 
+    <!-- Row containing image and details-->
     <div class="row justify-content-center">
+
+        <!-- Image -->
         <div class="col-5 text-center ml-5 pl-5 mr-0 pr-0">
             <?php  
                 echo '<img src="data:image;base64,' . base64_encode($img) . '" class="img-fluid mx-auto w-50">';
             ?>
         </div>
+
+        <!-- Details -->
         <div class="col-4">
             <h2 class="mt-5"><?php echo $productDetails['name']; ?></h2>
             <h5 class="mb-3 mt-3">Details</h5>
@@ -102,20 +117,26 @@
             <p>Item Code: <?php echo $productDetails['itm_code']; ?></p>
             <p>Description: <?php echo $productDetails['itm_desc']; ?></p>
             <?php endif; ?>
-
+            
+            <!-- Number of people who have favourited item -->
             <p class="lead">&#9733 24</p>
-
+            
+            <!-- Add to favourites button, checks if already in favourites -->
             <?php if(isset($_SESSION['username']) && !in_watchlist($productDetails['itm_code'])): ?>
-                <form method="post" action="addtowatchlist.php">
+                <form method="post" action="addtofavourites.php">
                     <input type="hidden" name="itm_code" value="<?= $productDetails['itm_code']; ?>">
                     <button class="btn btn-primary" type="submit">Add to Favourites</button>
                 </form>
             <?php else: ?>
-                <p>item is in your favourites. click here to remove</p>
+                <form action="removefavourites.php" method="post">
+                    <input type="hidden" name="itm_code" value="<?= $productDetails['itm_code']; ?>">
+                    <p>&#10003; Item is in your favourites. <button class="btn btn-danger btn-sm" type="submit">remove</button></p>
+                </form>
             <?php endif; ?>
         </div>
     </div>
-
+    
+    <!-- Row for reviews etc. -->
     <div class="row justify-content-center mt-5">
         <h2>Comments and Reviews</h2>
     </div>
