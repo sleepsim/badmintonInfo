@@ -51,7 +51,7 @@
             </div>
 
             <!-- [SECTION] Shoes -->
-            <div class="row justify-content-md-center pt-5 bg-secondary mb-5 pb-5">
+            <div class="row justify-content-md-center pt-5 bg-custom1 text-white mb-5 pb-5">
                 <!-- Info + Buttons -->
                 <div class="col-md-auto">
                     <img src="assets/SHB65Z.webp" class="img-fluid mx-auto d-block w-50">
@@ -83,12 +83,12 @@
 
                     <!-- Buttons -->
                     <div class="d-flex justify-content-center">
-                        <a href="playerlist.php?gender=male" class="btn btn-primary m-1">Browse Men's</a>
-                        <a href="playerlist.php?gender=female" class="btn btn-primary m-1">Browse Women's</a>
+                        <a href="playerlist.php?gender=male" class="btn btn-dark m-1">Browse Men's</a>
+                        <a href="playerlist.php?gender=female" class="btn btn-dark m-1">Browse Women's</a>
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <a href="playerlist.php" class="btn btn-primary m-1">Browse All Players ></a>
+                        <a href="playerlist.php" class="btn btn-dark m-1">Browse All Players</a>
                     </div>
 
                 </div>

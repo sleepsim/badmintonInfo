@@ -68,7 +68,22 @@
         header("Location: equipmentlist.php");
     }
 
+
+    // Get number of people who favourited item
+    $favquery = "SELECT * FROM favourites WHERE itm_code = ?";
+    $stmt2 = $db->prepare($favquery);
+    $stmt2->bind_param('s', $productDetails['itm_code']);
+    $stmt2->execute();
+    $countResult = $stmt2->get_result();
+    $countNum = $countResult->num_rows;
     
+    // Get all pro players who use this equipment
+    $usedbyQuery = "SELECT * FROM  usedby JOIN player ON usedby.id = player.id
+                    WHERE usedby.itm_code = ?";
+    $usedbyStmt = $db->prepare($usedbyQuery);
+    $usedbyStmt->bind_param('s',$productDetails['itm_code']);
+    $usedbyStmt->execute();
+    $usedbyResult = $usedbyStmt->get_result();
 
 ?>
 
@@ -119,15 +134,15 @@
             <?php endif; ?>
             
             <!-- Number of people who have favourited item -->
-            <p class="lead">&#9733 24</p>
+            <?php echo "<p class=\"lead\">&#9733 $countNum</p>"; ?>
             
-            <!-- Add to favourites button, checks if already in favourites -->
+            <!-- If user is logged in, add to favourites button, checks if already in favourites -->
             <?php if(isset($_SESSION['username']) && !in_watchlist($productDetails['itm_code'])): ?>
                 <form method="post" action="addtofavourites.php">
                     <input type="hidden" name="itm_code" value="<?= $productDetails['itm_code']; ?>">
                     <button class="btn btn-primary" type="submit">Add to Favourites</button>
                 </form>
-            <?php else: ?>
+            <?php elseif(isset($_SESSION['username']) && in_watchlist($productDetails['itm_code'])): ?>
                 <form action="removefavourites.php" method="post">
                     <input type="hidden" name="itm_code" value="<?= $productDetails['itm_code']; ?>">
                     <p>&#10003; Item is in your favourites. <button class="btn btn-danger btn-sm" type="submit">remove</button></p>
@@ -135,10 +150,46 @@
             <?php endif; ?>
         </div>
     </div>
+</div>
+
+<div class="container-fluid bg-custom1 text-white">
+    <!-- Used by pros, show image and name -->
+    <div class="row justify-content-center mt-5 mb-3s">
+        <h3 class="mt-5">Used by</h3>
+    </div>
+    <!-- Row to hold columns -->
+    <div class="row justify-content-center mt-5 text-center">
+        <?php
+            $count = 0; // Counter to keep track of items in the row
+            while($row = mysqli_fetch_array($usedbyResult)) {
+                // Convert blob to image
+                $imageData = base64_encode($row['img']);
+                $imageSrc = "data:image;base64," . $imageData;
     
+                // Check if the counter is a multiple of 2
+                if ($count % 3 == 0 && $count > 0) {
+                    echo '</div>'; // Close the current row if it's not the first iteration
+                    echo '<div class="row justify-content-center mt-3 text-center">'; // Start a new row
+                }
+        ?>
+                <div class="col-md-auto mb-2">
+                    <a href="playerdetails.php?id=<?= $row['id']?>"><img src="<?= $imageSrc; ?>" alt="<?= $row['firstName']; ?>" class="rounded-circle img-fluid mx-auto w-50"></a>
+                    <a href="playerdetails.php?id=<?= $row['id']?>">
+                        <p class="text-center mt-2 text-white"><?= $row['firstName'] . " " . $row['lastName'] ?></p>
+                    </a>
+                </div>
+        <?php
+                $count++;
+            }
+        ?>
+    </div>
+</div>
+
+
+
     <!-- Row for reviews etc. -->
     <div class="row justify-content-center mt-5">
-        <h2>Comments and Reviews</h2>
+        <h4>Comments and Reviews</h4>
     </div>
 
 </div>
@@ -147,4 +198,6 @@
     require('footer.php');
     // After rendering everything free the result.
     $result->free_result();
+    $countResult->free_result();
+    $usedbyResult->free_result();
 ?>

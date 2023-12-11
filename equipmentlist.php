@@ -106,7 +106,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
                     
                     echo "</div>";
                 
-                    if ($counter == 2) { // Adjust this condition based on the number of columns you want per row
+                    if ($counter == 2) { // 2 Columns per row
                         echo "</div>"; // Close the row div
                         $counter = 0;
                     } else {

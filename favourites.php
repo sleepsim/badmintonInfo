@@ -57,7 +57,7 @@
                     echo '<form action="removefavourites.php" method="post">';
                     echo '<input type="hidden" name="itm_code" value="' . $row['itm_code'] . '">';
                     echo '<input type="hidden" name="redirect" value="favourites">';
-                    echo '<p>&#10003;  <button class="btn btn-danger btn-sm" type="submit">remove</button></p>';
+                    echo '<p><button class="btn btn-danger btn-sm" type="submit">remove</button></p>';
                     echo '</form>';
                 } else {
                     // Empty column

@@ -48,7 +48,6 @@
             $stmt->execute();
             $stmt->bind_result($count);
             return ($stmt->fetch() && $count >0);
-
         }
 
         return false;
