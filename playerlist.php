@@ -104,7 +104,7 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
                 <label><input type="radio" name="discipline" value="Doubles"> Doubles</label><br>
                 <!-- <label><input type="radio" name="manufacturer" value=""> Victor</label><br> -->
 
-                <input type="submit" value="Filter">
+                <input type="submit" value="Filter" class="btn btn-primary">
             </form>
 
         </div>

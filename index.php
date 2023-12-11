@@ -37,10 +37,10 @@
                     <h2>Browse Rackets</h2>
                     <p>Browse popular rackets from different manufacturers</p>
                     <div class="d-flex flex-column m-3">
+                        <a href="equipmentlist.php?type=racket&manufacturer=yonex" class="btn btn-dark m-1">Browse Yonex</a>
+                        <a href="equipmentlist.php?type=racket&manufacturer=li ning" class="btn btn-dark m-1">Browse Li-Ning</a>
+                        <a href="equipmentlist.php?type=racket&manufacturer=victor" class="btn btn-dark m-1">Browse Victor</a>
                         <a href="equipmentlist.php?type=racket" class="btn btn-primary m-1">Browse All</a>
-                        <a href="equipmentlist.php?type=racket&manufacturer=yonex" class="btn btn-primary m-1">Browse Yonex</a>
-                        <a href="equipmentlist.php?type=racket&manufacturer=li ning" class="btn btn-primary m-1">Browse Li-Ning</a>
-                        <a href="equipmentlist.php?type=racket&manufacturer=victor" class="btn btn-primary m-1">Browse Victor</a>
                     </div>
                 </div>
 
@@ -62,10 +62,10 @@
                     <h2>Browse Shoes</h2>
                     <p>Browse shoes from different manufacturers</p>
                     <div class="d-flex flex-column m-3">
-                        <a href="equipmentlist.php?type=shoes" class="btn btn-primary m-1">Browse All</a>
-                        <a href="equipmentlist.php?type=shoes&manufacturer=yonex" class="btn btn-primary m-1">Browse Yonex</a>
-                        <a href="equipmentlist.php?type=shoes&manufacturer=li ning" class="btn btn-primary m-1">Browse Li-Ning</a>
-                        <a href="equipmentlist.php?type=shoes&manufacturer=victor" class="btn btn-primary m-1">Browse Victor</a>
+                        <a href="equipmentlist.php?type=shoes&manufacturer=yonex" class="btn btn-light m-1">Browse Yonex</a>
+                        <a href="equipmentlist.php?type=shoes&manufacturer=li ning" class="btn btn-light m-1">Browse Li-Ning</a>
+                        <a href="equipmentlist.php?type=shoes&manufacturer=victor" class="btn btn-light m-1">Browse Victor</a>
+                        <a href="equipmentlist.php?type=shoes" class="btn btn-danger m-1">Browse All</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                     <img src="assets/players.jpg" class="img-fluid mx-auto d-block w-50">
 
                     <!-- Buttons -->
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mt-3">
                         <a href="playerlist.php?gender=male" class="btn btn-dark m-1">Browse Men's</a>
                         <a href="playerlist.php?gender=female" class="btn btn-dark m-1">Browse Women's</a>
                     </div>

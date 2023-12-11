@@ -37,7 +37,7 @@
 
 <div class="container pt-3 mb-5">
     <div class="row justify-content-center">
-        <h2>My Favourites</h2>
+        <h2><?= $_SESSION['username'] ?>'s Favourites</h2>
     </div>
 
     <div class="col">

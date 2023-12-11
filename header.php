@@ -50,6 +50,10 @@
                     <?php 
                         // If logged in, change right buttons to logout, else register/login
                         if(isset($_SESSION['username'])){
+                            $usernameHolder = $_SESSION['username'];
+                            echo  "<li class=\"nav-item\">
+                                  <a class=\"nav-link\" \">Welcome, $usernameHolder!</a>
+                                  </li>";
                             echo  "<li class=\"nav-item\">
                                   <a class=\"nav-link\" href=\"logout.php\">Logout</a>
                                   </li>";

@@ -62,7 +62,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
 <div class="container pt-3">
     <div class="row ml-0"><h6><a href="equipmentlist.php">All Equipment</a> / </h6></div>
 
-    <div class="row justify-content-center"><h2>Badminton Rackets</h2></div>
+    <div class="row justify-content-center"><h2>Equipment Database</h2></div>
 </div>
 
 <div class="container pt-3 mb-5">

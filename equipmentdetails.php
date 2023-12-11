@@ -134,7 +134,7 @@
             <?php endif; ?>
             
             <!-- Number of people who have favourited item -->
-            <?php echo "<p class=\"lead\">&#9733 $countNum</p>"; ?>
+            <?php echo "<p class=\"lead\">&#9733 $countNum favourites</p>"; ?>
             
             <!-- If user is logged in, add to favourites button, checks if already in favourites -->
             <?php if(isset($_SESSION['username']) && !in_watchlist($productDetails['itm_code'])): ?>
@@ -155,7 +155,7 @@
 <div class="container-fluid bg-custom1 text-white">
     <!-- Used by pros, show image and name -->
     <div class="row justify-content-center mt-5 mb-3s">
-        <h3 class="mt-5">Used by</h3>
+        <h3 class="mt-5 pr-4">Used by</h3>
     </div>
     <!-- Row to hold columns -->
     <div class="row justify-content-center mt-5 text-center">
@@ -188,9 +188,9 @@
 
 
     <!-- Row for reviews etc. -->
-    <div class="row justify-content-center mt-5">
+    <!-- <div class="row mt-5">
         <h4>Comments and Reviews</h4>
-    </div>
+    </div> -->
 
 </div>
 
