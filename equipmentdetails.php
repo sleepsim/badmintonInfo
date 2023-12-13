@@ -187,11 +187,72 @@
 
 
 
-    <!-- Row for reviews etc. -->
-    <!-- <div class="row mt-5">
-        <h4>Comments and Reviews</h4>
-    </div> -->
+<!-- Row for reviews etc. -->
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center mb-3">
+        <h4 class="mr-2">Ratings and Reviews -</h4>
+        <p>Avg:<span style="font-size:125%; color: rgb(255,234,0);">&#9733;</span>NA/5.0</p>
 
+    </div>
+    
+    <?php if(isset($_SESSION['username'])) : ?>
+        <div class="row justify-content-center">
+            <div class="h5">Leave a review</div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+                <form class="rating">
+                    <label>
+                        <input type="radio" name="stars" value="1" />
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="2" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="3" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="4" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="stars" value="5" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                </form>
+        </div>
+
+        <div class="row justify-content-center mt-3 mb-3">
+            <textarea name="reviewText" id="reviewText" cols="70" rows="5"></textarea>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    <?php endif; ?>
+
+    <div class="row justify-content-center">
+
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
 </div>
 
 <?php 
