@@ -196,51 +196,56 @@
     </div>
     
     <?php if(isset($_SESSION['username'])) : ?>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
             <div class="h5">Leave a review</div>
         </div>
 
-        <div class="row justify-content-center align-items-center">
-                <form class="rating">
-                    <label>
-                        <input type="radio" name="stars" value="1" />
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="2" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="3" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="4" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="5" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
+        <div class="row text-center">
+            <div class="col">
+                <form action="leavereview.php" method="post">
+                    <input type="hidden" name="itm_code" value="<?= $itemCode ?>">
+                    <div class="row justify-content-center text-center">
+                        <div class="rating">
+                            <label>
+                                <input type="radio" name="stars" value="1" />
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="2" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="3" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="4" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stars" value="5" />
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                                <span class="icon">★</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3 mb-3">
+                        <textarea name="reviewText" id="reviewText" cols="70" rows="5"></textarea>
+                    </div>
+                    <div class="row justify-content-center mb-5">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
                 </form>
-        </div>
-
-        <div class="row justify-content-center mt-3 mb-3">
-            <textarea name="reviewText" id="reviewText" cols="70" rows="5"></textarea>
-        </div>
-
-        <div class="row justify-content-center mb-5">
-            <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
         </div>
     <?php endif; ?>
 
@@ -249,10 +254,14 @@
     </div>
 
     <div class="row">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col">a</div>
+        <div class="col">b</div>
+        <div class="col">c</div>
     </div>
+
+    <?php 
+        if(isset($_GET['stars']));
+    ?>
 </div>
 
 <?php 
