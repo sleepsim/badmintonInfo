@@ -78,7 +78,7 @@
                 <br>
                 <!-- Submit button -->
                 <input type="submit" name="submit" value="submit" class="btn btn-primary mb-3">
-                <p>Already a member? <a href="register.php">Login Here</a></p>
+                <p>Already a member? <a href="login.php">Login Here</a></p>
             </form>
         </div>
         <div class="col"></div> <!-- Spacer2-->
