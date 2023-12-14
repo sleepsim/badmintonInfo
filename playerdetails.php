@@ -41,6 +41,15 @@
         $stmt2->bind_param('s', $_GET['id']);
         $stmt2->execute();
         $equipmentResult = $stmt2->get_result();
+
+        $followersquery = "SELECT * FROM following WHERE id = ?";
+        $fostmt = $db->prepare($followersquery);
+        $fostmt->bind_param('s', $_GET['id']);
+        $fostmt->execute();
+        $countResult = $fostmt->get_result();
+        $countNum = $countResult->num_rows;
+
+
     }else{ //Error handling, if id empty-> playerlist
         header("Location: playerlist.php");
         exit();
@@ -75,7 +84,7 @@
         <!-- Right column, details -->
         <div class="col-4">
             <h2 class="mb-3"><?php echo $firstName . " " .$lastName; ?></h2>
-            <p class="lead mb-4">0 Followers</p>
+            <p class="lead mb-4"><?= $countNum?> Followers</p>
             <p>Nationality: <?php echo $playerDetails['nationality']; ?></p>
             <p>Age: <?php echo $playerDetails['age']; ?></p>
             <p>Gender: <?php echo $playerDetails['gender']; ?></p>
