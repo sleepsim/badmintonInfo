@@ -189,13 +189,7 @@
 
 <!-- Row for reviews etc. -->
 <div class="container-fluid mt-5">
-    <div class="row justify-content-center mb-3">
-        <h4 class="mr-2">Ratings and Reviews -</h4>
-        <p>Avg:<span style="font-size:125%; color: rgb(255,234,0);">&#9733;</span>NA/5.0</p>
-
-    </div>
-    
-    <?php if(isset($_SESSION['username'])) : ?>
+<?php if(isset($_SESSION['username'])) : ?>
         <div class="row justify-content-center align-items-center">
             <div class="h5">Leave a review</div>
         </div>
@@ -249,14 +243,48 @@
         </div>
     <?php endif; ?>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-3">
+        <h4 class="mr-2">Ratings and Reviews -</h4>
+        <?php 
+            $ratingQuery = "SELECT AVG(rating) FROM comments WHERE itm_code = ?";
+            $ratingStmt = $db->prepare($ratingQuery);
+            $ratingStmt->bind_param('s', $itemCode);
+            $ratingStmt->execute();
+            $ratingResult = $ratingStmt->get_result()->fetch_assoc();
+            $reviewStarAverage = $ratingResult['AVG(rating)'];
+        ?>
+        <p>Avg:<span style="font-size:125%; color: rgb(255,234,0);">&#9733;</span><?= number_format((float)$reviewStarAverage, 1, '.', '')?>/5.0</p>
 
     </div>
 
-    <div class="row">
-        <div class="col">a</div>
-        <div class="col">b</div>
-        <div class="col">c</div>
+    <div class="row justify-content-center text-center">
+        <div class="col mb-5">
+        <?php 
+
+            $reviewsQuery = "SELECT * FROM comments WHERE itm_code = ?";
+            $reviewsStmt = $db->prepare($reviewsQuery);
+            $reviewsStmt->bind_param('s', $itemCode);
+            $reviewsStmt->execute();
+            $reviewsResult = $reviewsStmt->get_result();
+
+            while ($row = mysqli_fetch_array($reviewsResult)) {
+                echo "<h5 class='mt-3'>" . $row['username'] . " " . $row['rating'] . "&#9733</h5>";
+                
+                echo "<p class='mt-3 mb-3'>" . $row['comment'] . "</p>";
+
+                if(isset($_SESSION['username'])){
+                    if ($row['username'] == $_SESSION['username']) {
+                        echo "<form action='deletecomment.php' method='post'>";
+                        echo "<input type='hidden' name='commentID' value='" . $row['comment_ID'] . "'>";
+                        echo "<input type='hidden' name='itm_code' value='" . $itemCode . "'>";
+                        echo "<input type='submit' class='submit-textonly-style' value='delete comment'>";
+                        echo "</form>";
+                    }       
+                }     
+            }
+
+        ?>
+        </div>
     </div>
 
     <?php 

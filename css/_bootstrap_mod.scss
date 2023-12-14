@@ -12,6 +12,19 @@ textarea{
     padding: 15px;
 }
 
+.submit-textonly-style{
+  background:rgb(0, 0, 0, 0); 
+  border:0 none;
+  color: #007bff;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+
+  &:hover{
+    color:red;
+  }
+}
+
 .rating {
     display: inline-block;
     position: relative;

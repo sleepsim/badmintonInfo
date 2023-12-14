@@ -21,9 +21,16 @@
         $stmt->execute();
 
         echo "<script>
-                        alert(\"Review Added!\");
-                      </script>";
+                alert(\"Review Added!\");
+              </script>";
         header("Location: equipmentdetails.php?itm_code=$itemCode");
         exit();
+    }else{
+        echo "<script>
+                alert(\"Please enter number of stars!\");
+                window.location = \"equipmentdetails.php?itm_code=$itemCode\";
+              </script>";
+        
+        exit();   
     }
 ?>
