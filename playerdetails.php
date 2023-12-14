@@ -11,8 +11,15 @@
         $stmt->bind_param('s', $_GET['id']);
         $stmt->execute();   
 
+
         //Get prepared statement results
         $result = $stmt->get_result();
+
+        // Error handling, if player does not exist in database
+        if(!$result->num_rows >0){
+            header("Location: playerlist.php");
+        }
+
         $playerDetails = $result->fetch_assoc();
 
         //Set variables for players
@@ -34,6 +41,9 @@
         $stmt2->bind_param('s', $_GET['id']);
         $stmt2->execute();
         $equipmentResult = $stmt2->get_result();
+    }else{ //Error handling, if id empty-> playerlist
+        header("Location: playerlist.php");
+        exit();
     }
 ?>
 
@@ -73,13 +83,13 @@
 
             <!-- If user is logged in, add to favourites button, checks if already in favourites -->
             <?php if(isset($_SESSION['username']) && !is_following($id)): ?>
-                <form method="post" action="addtofavourites.php">
-                    <input type="hidden" name="itm_code" value="<?= $id; ?>">
+                <form method="post" action="follow.php">
+                    <input type="hidden" name="player_id" value="<?= $id; ?>">
                     <button class="btn btn-primary" type="submit">Follow player</button>
                 </form>
             <?php elseif(isset($_SESSION['username']) && is_following($id)): ?>
-                <form action="removefavourites.php" method="post">
-                    <input type="hidden" name="itm_code" value="<?= $id; ?>">
+                <form action="unfollow.php" method="post">
+                    <input type="hidden" name="player_id" value="<?= $id; ?>">
                     <p>&#10003; following player. <button class="btn btn-danger btn-sm" type="submit">unfollow</button></p>
                 </form>
             <?php endif; ?>
