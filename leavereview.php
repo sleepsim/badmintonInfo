@@ -3,6 +3,7 @@
 
     $message = "";
     
+    // Check item code
     if(isset($_POST['itm_code'])){
         $itemCode = $_POST['itm_code'];
     }else{
@@ -10,6 +11,7 @@
         exit();
     }
 
+    // Checks if user inputted star rating
     if(isset($_POST['stars'])){
         $commentHolder = "";
         if(isset($_POST['reviewText'])){
@@ -25,7 +27,7 @@
               </script>";
         header("Location: equipmentdetails.php?itm_code=$itemCode");
         exit();
-    }else{
+    }else{ //If there are no stars, alerts users and returns them back to item page
         echo "<script>
                 alert(\"Please enter number of stars!\");
                 window.location = \"equipmentdetails.php?itm_code=$itemCode\";

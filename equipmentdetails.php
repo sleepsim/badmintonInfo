@@ -152,8 +152,8 @@
     </div>
 </div>
 
+<!-- Used by pros SECTION, show image and name -->
 <div class="container-fluid bg-custom1 text-white">
-    <!-- Used by pros, show image and name -->
     <div class="row justify-content-center mt-5 mb-3s">
         <h3 class="mt-5 pr-4">Used by</h3>
     </div>
@@ -186,17 +186,18 @@
 </div>
 
 
-
 <!-- Row for reviews etc. -->
 <div class="container-fluid mt-5">
+
+<!-- Leave a review section, can only be seen if logged in--> 
 <?php if(isset($_SESSION['username'])) : ?>
         <div class="row justify-content-center align-items-center">
             <div class="h5">Leave a review</div>
         </div>
-
         <div class="row text-center">
             <div class="col">
                 <form action="leavereview.php" method="post">
+                    <!-- Star system -->
                     <input type="hidden" name="itm_code" value="<?= $itemCode ?>">
                     <div class="row justify-content-center text-center">
                         <div class="rating">
@@ -232,9 +233,11 @@
                             </label>
                         </div>
                     </div>
+                    <!-- Textarea -->
                     <div class="row justify-content-center mt-3 mb-3">
                         <textarea name="reviewText" id="reviewText" cols="70" rows="5"></textarea>
                     </div>
+                    <!-- Submit button -->
                     <div class="row justify-content-center mb-5">
                         <input type="submit" value="Submit" class="btn btn-primary">
                     </div>
@@ -243,6 +246,7 @@
         </div>
     <?php endif; ?>
 
+    <!-- Ratings and reviews -->
     <div class="row justify-content-center mb-3">
         <h4 class="mr-2">Ratings and Reviews -</h4>
         <?php 
@@ -257,21 +261,23 @@
 
     </div>
 
+    <!-- Show comments -->
     <div class="row justify-content-center text-center">
         <div class="col mb-5">
         <?php 
-
             $reviewsQuery = "SELECT * FROM comments WHERE itm_code = ?";
             $reviewsStmt = $db->prepare($reviewsQuery);
             $reviewsStmt->bind_param('s', $itemCode);
             $reviewsStmt->execute();
             $reviewsResult = $reviewsStmt->get_result();
 
+            // Go through all and show comments/ratings
             while ($row = mysqli_fetch_array($reviewsResult)) {
                 echo "<h5 class='mt-3'>" . $row['username'] . " " . $row['rating'] . "&#9733</h5>";
                 
                 echo "<p class='mt-3 mb-3'>" . $row['comment'] . "</p>";
 
+                //If logged in user is author, give option to delete comment 
                 if(isset($_SESSION['username'])){
                     if ($row['username'] == $_SESSION['username']) {
                         echo "<form action='deletecomment.php' method='post'>";

@@ -5,7 +5,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
-        <title>352 Final template</title>
+        <title>badmintonINFO - 352 </title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">

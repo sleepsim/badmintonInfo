@@ -89,8 +89,10 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
     <div class="row justify-content-center"><h2>Professional Players</h2></div>
 </div>
 
+<!-- Main Container -->
 <div class="container pt-3 mb-5">
     <div class="row justify-content-around">
+        <!-- Left Column: Filters-->
         <div class="col-2">
             <h4>Filters</h4>
             <form action="playerlist.php" method="get">
@@ -108,7 +110,7 @@ if (isset($_GET['gender']) && !empty($_GET['gender']) && ($_GET['gender'] != 'al
             </form>
 
         </div>
-
+        <!-- Right Column: Shows players -->
         <div class="col ml-5">
             <?php
                 $counter = 0;

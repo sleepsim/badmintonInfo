@@ -20,12 +20,9 @@
         $stmt->bind_param('ss', $itm_code, $username);
         $stmt->execute();
 
-        //Old popup, feels very dated 
-        // echo "<script> 
-        //         alert(\"Added to favourites!\");
-        //       </script>";
     }
 
+    // Header to return to item listing
     header("Location: equipmentdetails.php?itm_code=$itm_code");
     exit();
 ?>

@@ -85,19 +85,3 @@
         ?>
     </div>
 </div>
-
-
-<?php 
-
-    // while($row = mysqli_fetch_assoc($result)){
-    //     $name = $row['name'];
-    //     $itm_code = $row['itm_code'];
-    //     $img = $row['img'];
-
-    //     echo "<li>";
-    //     echo "$name + $itm_code";
-    //     echo '<a href="equipmentdetails.php?itm_code=' . $row['itm_code'] . '"><img src="data:image;base64,' . base64_encode($row['img']) . '" class="img-fluid mx-auto w-50"></a><br>';
-    //     echo "</li>";
-    // }
-
-?>

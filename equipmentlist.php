@@ -65,8 +65,10 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
     <div class="row justify-content-center"><h2>Equipment Database</h2></div>
 </div>
 
+<!-- Main container -->
 <div class="container pt-3 mb-5">
     <div class="row justify-content-around">
+         <!-- Filters -->
         <div class="col-2">
             <h4>Filters</h4>
             <p>Type</p>
@@ -84,16 +86,17 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
             </form>
 
         </div>
-
+        <!-- Actual content -->
         <div class="col ml-5">
             <?php
                 $counter = 0;
 
                 while ($row = mysqli_fetch_array($result)) {
+                    // Used for limitng number of rows/columns
                     if ($counter == 0) {
                         echo "<div class=\"row align-items-end\">";
                     }
-                
+                    
                     echo "<div class=\"col text-center\">";
                     
                     if (isset($row['itm_code'])) {
@@ -134,7 +137,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
     $result->free_result();
 ?>
 
-<!-- JS for choosing which radio -->
+<!-- JS for choosing which filters were previously chosen -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var params = new URLSearchParams(window.location.search);
@@ -156,7 +159,7 @@ if (isset($_GET['type']) && !empty($_GET['type']) && ($_GET['type'] != 'all')) {
         manufacturerRadioButton.checked = true;
       }
     }
-
+    
     document.getElementById('filterForm').addEventListener('change', function() {
       var selectedType = document.querySelector('input[name="type"]:checked').value;
       var selectedManufacturer = document.querySelector('input[name="manufacturer"]:checked').value;

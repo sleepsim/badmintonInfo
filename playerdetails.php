@@ -49,17 +49,20 @@
     </div>
 </div>
 
+<!-- Main Container -->
 <div class="container-fluid">
     <div class="row pl-5 pt-3">
         <h6><a href="playerlist.php">All Players</a>  / <?php echo $firstName. " " . $lastName; ?></h6>
     </div>
 
     <div class="row justify-content-center">
+        <!-- Left column, player image-->
         <div class="col-5 text-center ml-5 pl-5 mr-0 pr-0">
             <?php  
                 echo '<img src="data:image;base64,' . base64_encode($img) . '" class="rounded img-fluid mx-auto w-50">';
             ?>
         </div>
+        <!-- Right column, details -->
         <div class="col-4">
             <h2 class="mb-3"><?php echo $firstName . " " .$lastName; ?></h2>
             <p class="lead mb-4">0 Followers</p>
@@ -67,9 +70,23 @@
             <p>Age: <?php echo $playerDetails['age']; ?></p>
             <p>Gender: <?php echo $playerDetails['gender']; ?></p>
             <p>World Rank: <?php echo $rank?> - <?php echo $discipline?></p>
+
+            <!-- If user is logged in, add to favourites button, checks if already in favourites -->
+            <?php if(isset($_SESSION['username']) && !is_following($id)): ?>
+                <form method="post" action="addtofavourites.php">
+                    <input type="hidden" name="itm_code" value="<?= $id; ?>">
+                    <button class="btn btn-primary" type="submit">Follow player</button>
+                </form>
+            <?php elseif(isset($_SESSION['username']) && is_following($id)): ?>
+                <form action="removefavourites.php" method="post">
+                    <input type="hidden" name="itm_code" value="<?= $id; ?>">
+                    <p>&#10003; following player. <button class="btn btn-danger btn-sm" type="submit">unfollow</button></p>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 
+    <!-- Shows what equipment the player uses -->
     <div class="row justify-content-center mt-5">
         <h4>Equipment Used</h4>
     </div>
@@ -79,11 +96,11 @@
         while ($row = mysqli_fetch_array($equipmentResult)) {
             // Start a new row for every two items
             if ($counter % 2 == 0) {
-                echo '<div class="row align-items-end justify-content-center text-center">';
+                echo '<div class="row align-items-end justify-content-center text-center mb-5">';
                 // Add a spacer column before the items
                 echo '<div class="col"></div>';
             }
-
+            
             echo '<div class="col">';
             echo '<a href="equipmentdetails.php?itm_code=' . $row['itm_code'] . '">';
             echo '<img src="data:image;base64,' . base64_encode($row['img']) . '" class="img-fluid mx-auto w-50"></a><br>';
@@ -104,10 +121,6 @@
             echo '<div class="col"></div></div>';
         }
     ?>
-
-    <div class="row justify-content-center mt-5 mb-5">
-        <h4>Fan Zone</h4>
-    </div>
 
 </div>
 
